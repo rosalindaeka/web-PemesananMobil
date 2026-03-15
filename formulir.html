@@ -1,16 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Formulir Pembelian Mobil</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Formulir Pembelian Mobil</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-red-100 via-white to-red-400 min-h-screen">
 
-<h1 class="text-3xl font-bold text-center mt-10">
-Formulir Pembelian Mobil
-</h1>
+<!-- NAVBAR -->
+<nav class="bg-white shadow border-b">
+  <div class="max-w-6xl mx-auto flex justify-between items-center py-2 px-5">
+
+    <!-- LOGO + NAMA -->
+    <div class="flex items-center">
+      <img src="assets/logo.png" alt="logo" class="h-20">
+      <h1 class="ml-3 flex font-bold">
+        <span class="text-black text-3xl self-center">Teras</span>
+        <span class="text-red-500 text-2xl self-center ml-1">Mobil 99</span>
+      </h1>
+    </div>
+
+    <!-- HAMBURGER -->
+    <button id="nav-toggle" class="md:hidden text-black text-3xl focus:outline-none">
+      &#9776;
+    </button>
+
+    <!-- MENU -->
+    <div id="nav-menu" class="hidden md:flex flex-col mt-2 md:flex-row md:mt-0 md:space-x-6 font-medium w-full md:w-auto">
+      <a href="beranda.html" class="nav-link py-1 md:py-0">Beranda</a>
+      <a href="formulir.html" class="nav-link py-1 md:py-0">Formulir</a>
+      <a href="tentang.html" class="nav-link py-1 md:py-0">Tentang</a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- JUDUL FORMULIR -->
+<div class="text-center mt-10">
+  <span class="block text-lg font-medium text-red-500">Formulir</span>
+  <span class="block text-3xl font-bold text-gray-800">Pembelian Mobil</span>
+</div>
+
+<!-- FORM -->
+<div class="max-w-xl mx-auto mt-6 bg-white p-6 rounded-xl shadow-lg">
+<form id="formPembelian">
+
+<label class="font-semibold">Nama Lengkap</label>
+<input type="text" class="w-full border p-2 rounded mb-4" id="nama" required>
+
+<label class="font-semibold">No HP / WhatsApp</label>
+<input type="text" class="w-full border p-2 rounded mb-4" id="nohp" required>
+
+<label class="font-semibold">Alamat</label>
+<textarea class="w-full border p-2 rounded mb-4" id="alamat" required></textarea>
+
+<label class="font-semibold">Merk Mobil</label>
+<select class="w-full border p-2 rounded mb-4" id="merk" required>
+<option value="">Pilih Merk</option>
+<option>Toyota</option>
+<option>Honda</option>
+<option>Daihatsu</option>
+<option>Suzuki</option>
+</select>
+
+<label class="font-semibold">Model / Tipe Mobil</label>
+<input type="text" class="w-full border p-2 rounded mb-4" id="model" required>
+
+<label class="font-semibold">Tahun Mobil</label>
+<select class="w-full border p-2 rounded mb-4" id="tahun" required>
+<option value="">Pilih Tahun</option>
+<option>2010</option>
+<option>2011</option>
+<option>2012</option>
+<option>2013</option>
+<option>2014</option>
+<option>2015</option>
+<option>2016</option>
+<option>2017</option>
+<option>2018</option>
+<option>2019</option>
+<option>2020</option>
+<option>2021</option>
+<option>2022</option>
+<option>2023</option>
+<option>2024</option>
+<option>2025</option>
+</select>
+
+<p class="font-semibold mt-4">Jenis Pembelian</p>
+<label class="mr-4">
+<input type="radio" name="pembelian" value="Cash" required onclick="hideInfo()"> Cash
+</label>
+<label>
+<input type="radio" name="pembelian" value="Kredit" required onclick="showInfo()"> Kredit
+</label>
+
+<p id="infoKredit" class="text-red-500 text-sm mt-2 hidden">
+*Wajib menyerahkan fotokopi KTP dan KK saat pengambilan mobil
+</p>
+
+<button type="submit" class="mt-6 w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
+Ajukan Pembelian
+</button>
+</form>
+</div>
+
+<script>
+// Toggle menu responsive (turun ke bawah)
+const navToggle = document.getElementById("nav-toggle");
+const navMenu = document.getElementById("nav-menu");
+navToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("flex");
+  navMenu.classList.toggle("hidden");
+});
+
+// Validasi & notifikasi
+const form = document.getElementById("formPembelian");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  if(form.checkValidity()){
+    alert("Data Berhasil Diajukan");
+    form.reset();
+  } else {
+    alert("Silakan lengkapi semua field yang wajib diisi.");
+  }
+});
+
+// Highlight active link sesuai halaman
+const links = document.querySelectorAll('.nav-link');
+const currentPage = window.location.pathname.split("/").pop();
+links.forEach(link => {
+  const linkPage = link.getAttribute('href');
+  if(linkPage === currentPage){
+    link.classList.add('text-red-500');
+    link.classList.remove('text-black');
+  } else {
+    link.classList.add('text-black');
+    link.classList.remove('text-red-500');
+  }
+});
+
+// Show/hide info kredit
+function showInfo(){ document.getElementById("infoKredit").classList.remove("hidden"); }
+function hideInfo(){ document.getElementById("infoKredit").classList.add("hidden"); }
+</script>
 
 </body>
 </html>
